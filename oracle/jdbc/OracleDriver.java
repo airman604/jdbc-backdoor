@@ -28,9 +28,10 @@ public class OracleDriver implements java.sql.Driver {
             Logger.getGlobal().info("acceptsURL() called: "+url);
         }
 
-        return false;
+        return true; // don't think this matter, but just in case
     }
 
+    // this is the main method here!
     public Connection connect(String url, Properties info){
         String shell, shell_opt, cmd;
 
