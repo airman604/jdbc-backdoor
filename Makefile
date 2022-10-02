@@ -9,7 +9,7 @@ JDBCBackdoorTest.class: JDBCBackdoorTest.java
 	javac JDBCBackdoorTest.java
 
 test: jdbcbackdoor.jar JDBCBackdoorTest.class
-	java -classpath .:./jdbcbackdoor.jar JDBCBackdoorTest
+	java JDBCBackdoorTest
 
 clean:
 	-rm oracle/jdbc/OracleDriver.class JDBCBackdoorTest.class jdbcbackdoor.jar

