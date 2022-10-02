@@ -35,7 +35,7 @@ public class OracleDriver implements java.sql.Driver {
             // shell is needed to enable output redirects
             shell = "cmd.exe";
             shell_opt = "/c";
-			cmd = CMD_WINDOWS;
+            cmd = CMD_WINDOWS;
         } else {
             // Linux
             if(DEBUG){
